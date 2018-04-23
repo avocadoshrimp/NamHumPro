@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (c) 2010, Oracle.
  * All rights reserved.
  *
@@ -30,6 +30,8 @@
 /* Anagram Game Application */
 
 package com.toy.anagrams.lib;
+
+import java.util.Random;
 
 /**
  * Implementation of the logic for the Anagram Game application.
@@ -85,7 +87,7 @@ final class StaticWordLibrary extends WordLibrary {
         "unsigned",
         "traditional"};
 
-    private static final String[] SCRAMBLED_WORD_LIST = {
+   /* private static final String[] SCRAMBLED_WORD_LIST = {
     		"ppyha",
     		"destiyn",
         "abtsartcoin",
@@ -133,7 +135,7 @@ final class StaticWordLibrary extends WordLibrary {
         "evtrxe",
         "nuisngde",
         "rtdatioialn"
-    };
+    };*/
     
     final static WordLibrary DEFAULT = new StaticWordLibrary();
 
@@ -157,8 +159,21 @@ final class StaticWordLibrary extends WordLibrary {
      * @param idx index of required word
      * @return word at that index in its scrambled form
      */
-    public String getScrambledWord(int idx) {
-        return SCRAMBLED_WORD_LIST[idx];
+    public String getScrambledWord(String str) {
+        //return SCRAMBLED_WORD_LIST[idx];
+        //String str;
+        String scrambled = "";
+        Random r = new Random();
+    	
+
+    	for (int j = 0; j <str.length(); j++)
+    	{
+    	    if ( r.nextBoolean() )
+    		scrambled = scrambled + str.charAt(j);
+    	    else
+    		scrambled = str.charAt(j) + scrambled;
+    	}
+    	return scrambled;
     }
 
     /**
