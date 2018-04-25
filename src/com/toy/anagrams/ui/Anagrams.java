@@ -83,15 +83,19 @@ public class Anagrams extends JFrame {
     /** Creates new form Anagrams */
     public Anagrams() {
         wordLibrary = WordLibrary.getDefault();
-        Random r=new Random();
+        int level = 0;
+        if( selectLevel != null)
+        	level = selectLevel.getSelectedIndex();
+        Random r = new Random();
         wordIdx = r.nextInt(wordLibrary.getSize());
         
         initComponents();
         getRootPane().setDefaultButton(guessButton);
        //scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
         String question = wordLibrary.getWord(wordIdx);
-        question = wordLibrary.getScrambledWord(question);
-        scrambledWord.setText(question);;
+        question = wordLibrary.getScrambledWord(question,level);
+        //question = wordLibrary.getScrambledWord(question,1);
+        scrambledWord.setText(question);
         pack();
         guessedWord.requestFocusInWindow();
         // Center in the screen
@@ -263,9 +267,10 @@ public class Anagrams extends JFrame {
     private void nextTrialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTrialActionPerformed
         wordIdx = (wordIdx + 1) % wordLibrary.getSize();
 
+        int level = selectLevel.getSelectedIndex();
         feedbackLabel.setText(" ");
-        String question=wordLibrary.getWord(wordIdx);
-        question = wordLibrary.getScrambledWord(question);
+        String question = wordLibrary.getWord(wordIdx);
+        question = wordLibrary.getScrambledWord(question, level);
         scrambledWord.setText(question);
         //scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
         guessedWord.setText("");
